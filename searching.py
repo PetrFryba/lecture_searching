@@ -1,3 +1,4 @@
+import json
 import os
 
 # get current working directory path
@@ -12,10 +13,25 @@ def read_data(file_name, field):
     :return: (list, string),
     """
     file_path = os.path.join(cwd_path, file_name)
+    # nacteni povolenych klíčů ze souboru
+    with open('sequential.json','r') as f:
+        allowed_key = json.load(f)
 
+    # ověření, zda je zadaný klíč (field) v množině povolených klíčů
+    if field not in allowed_key:
+        return None
+
+    with open(file_name, 'r') as f:
+        data = json.load(f)
+
+    return data.get(field)
 
 def main():
-    pass
+    # pass
+# zavolat funkce read_data s požadovanými vstupy
+    sequential_data = read_data("sequential.json", "unordered_numbers")
+    print(sequential_data)
+
 
 
 if __name__ == '__main__':
