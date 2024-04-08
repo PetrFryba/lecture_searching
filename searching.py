@@ -26,11 +26,34 @@ def read_data(file_name, field):
 
     return data.get(field)
 
+def linear_search(sekvence, target):
+
+    position = []
+    count = 0
+    for num in enumerate(sekvence):
+        if num == target:
+            position.append(i+1)
+            count += 1
+
+    return {'position': position, 'count': count}
+
+
+def pattern_search(DNA_seq, pattern):
+    position = []
+    for i in range(len(DNA_seq)):
+        if DNA_seq[i:i+len(pattern)] == pattern:
+            pozice = DNA_seq[i:i+len(pattern)]
+            position.append(pozice)
+
+    return position
+
+
 def main():
     # pass
 # zavolat funkce read_data s požadovanými vstupy
     sequential_data = read_data("sequential.json", "unordered_numbers")
     print(sequential_data)
+
 
 
 
