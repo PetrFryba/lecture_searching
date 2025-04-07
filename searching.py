@@ -26,6 +26,12 @@ cwd_path = os.getcwd()
 #
 #     return data.get(field)
 def read_data(file_name, field):
+     """
+     Reads json file and returns sequential data.
+     :param file_name: (str), name of json file
+     :param field: (str), field of a dict to return
+     :return: (list, string),
+     """
      if field not in {'unordered_numbers', 'ordered_numbers','dna_sequence'}:
          return None
 
@@ -34,15 +40,66 @@ def read_data(file_name, field):
 
      return seq[field]
 
+def linear_search(seq, num):
+     idx=[]
+     count = 0
+
+     for i in range(len(seq)):
+          if seq[i] == num:
+               idx.append(i)
+               count = count+1
+
+     return {'position': idx, 'count': count}
+
+
+def pattern_search(seq, pattern):
+     i = 0
+     delka_pattern = len(pattern)
+
+     vyskyt_vzoru = []
+     while i <= len(seq)-delka_pattern:
+          if seq[i:i+delka_pattern] == pattern:
+               vyskyt_vzoru.append(i)
+
+          i +=1
+
+     return vyskyt_vzoru
+
+
+
+
 def main():
      file_name = 'sequential.json'
+     field = 'dna_sequence'
+     pattern = 'ATA'
 
-     seq =read_data(file_name, "unordered_numbers")
-     print(seq)
+     seq = read_data(file_name, field)
+     print(pattern_search(seq, pattern))
+
 
 if __name__ == '__main__':
      main()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# #
 # def linear_search(sekvence, target):
 #
 #     position = []
